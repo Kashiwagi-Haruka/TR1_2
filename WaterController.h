@@ -3,11 +3,14 @@
 #include <Novice.h>
 #include <array>
 #include <vector>
+#include <random>
 using namespace KamataEngine;
 
 // 分割数
 static const int kRowCount = 12; // 縦分割（行数）
 static const int kColCount = 50; // 横分割（列数）
+
+
 
 class WaterController {
 public:
@@ -32,4 +35,17 @@ private:
 
 	// 格子点配列: [行][列]
 	std::vector<std::vector<Vector2>> gridPoints_;
+
+	struct SplashParticle {
+		Vector2 pos;
+		Vector2 vel;
+		float lifetime;
+		float age;
+		float scale;
+		float angle;
+	};
+
+	std::vector<SplashParticle> splashes;
+	int splashTex = -1; // 水しぶき画像テクスチャ
+	std::mt19937 mt{std::random_device{}()};
 };
